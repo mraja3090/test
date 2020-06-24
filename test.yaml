@@ -1,0 +1,30 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: jenkins-deployment-01
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      app: jenkins-01
+  template: 
+    metadata: 
+      labels: 
+        app: jenkins-01
+    spec: 
+      containers: 
+        - 
+          image: "jenkins/jenkins:lts"
+          name: jenkins-01
+          ports: 
+            - 
+              containerPort: 8080
+          volumeMounts: 
+            - 
+              mountPath: /var/jenkins_home_01
+              name: jenkins-home_01
+      volumes: 
+        - 
+          emptyDir: {}
+          name: jenkins-home_01
